@@ -6,20 +6,19 @@ shopt -s extglob
 echo "Welcome to User Registration Problem"
 
 #Patterns
-firstNamePattern="^[A-Z]{1}[a-z]{2,}$"
+readonly NAME_PATTERN="^[A-Z]{1}[a-z]{2,}$"
 
-read -p "Enter First Name : " firstName
-
-#Validating user first name
-function validateUserFirstName()
+#Validating user name
+function validateUserName()
 {
 	local userDetails=$1 pattern=$2
-	if [[ $userDetails =~ $pattern ]]
-	then
-		echo "Valid Name"
-	else
-		echo "Invalid name"
-	fi
+	[[ $userDetails =~ $pattern ]] && echo "Valid Name" || echo "Invalid Name"
 }
 
-validateUserFirstName $firstName $firstNamePattern
+#read first name
+read -p "Enter First Name : " firstName
+validateUserName $firstName $NAME_PATTERN
+
+#read last name
+read -p "Enter Last Name : " lastName
+validateUserName $lastName $NAME_PATTERN
