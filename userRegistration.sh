@@ -7,18 +7,23 @@ echo "Welcome to User Registration Problem"
 
 #Patterns
 readonly NAME_PATTERN="^[A-Z]{1}[a-z]{2,}$"
+readonly EMAIL_PATTERN="^([a-zA-Z]{3,}([.|_|+|-]?[a-zA-Z0-9]+)?[@][a-zA-Z0-9]+[.][a-zA-Z]{2,3}([.]?[a-zA-Z]{2,3})?)$"
 
-#Validating user name
-function validateUserName()
+#Validate user details
+function validateUserDetails()
 {
 	local userDetails=$1 pattern=$2
-	[[ $userDetails =~ $pattern ]] && echo "Valid Name" || echo "Invalid Name"
+	[[ $userDetails =~ $pattern ]] && echo "Valid Details" || echo "Invalid Details"
 }
 
 #read first name
 read -p "Enter First Name : " firstName
-validateUserName $firstName $NAME_PATTERN
+validateUserDetails $firstName $NAME_PATTERN
 
 #read last name
 read -p "Enter Last Name : " lastName
-validateUserName $lastName $NAME_PATTERN
+validateUserDetails $lastName $NAME_PATTERN
+
+#read email id
+read -p "Enter Email Id : " emailId
+validateUserDetails $emailId $EMAIL_PATTERN
