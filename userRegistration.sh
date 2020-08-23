@@ -6,9 +6,10 @@ shopt -s extglob
 echo "Welcome to User Registration Problem"
 
 #Patterns
-readonly NAME_PATTERN="^[A-Z]{1}[a-z]{2,}$"
+readonly NAME_PATTERN="^[[:upper:]]{1}[[:lower:]]{2,}$"
 readonly EMAIL_PATTERN="^([a-zA-Z]{3,}([.|_|+|-]?[a-zA-Z0-9]+)?[@][a-zA-Z0-9]+[.][a-zA-Z]{2,3}([.]?[a-zA-Z]{2,3})?)$"
 readonly MOBILE_NUMBER_PATTERN="^[0-9]{1,3}[' '][0-9]{10}$"
+readonly PASSWORD_AT_LEAST_EIGHT_CHARACTERS_LONG="[a-z]{8,}"
 
 #Validate user details
 function validateUserDetails()
@@ -37,4 +38,8 @@ validateUserDetails $emailId $EMAIL_PATTERN
 
 #read mobile number
 read -p "Enter Mobile Number : " mobileNumber
-validateUserMobileNumber $mobileNumber $MOBILE_NUMBER_PATTERN
+validateUserMobileNumber
+
+#read password
+read -p "Enter Password(At least 8 characters long)  : " password
+validateUserDetails $password $PASSWORD_AT_LEAST_EIGHT_CHARACTERS_LONG
