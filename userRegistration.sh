@@ -9,7 +9,6 @@ echo "Welcome to User Registration Problem"
 readonly NAME_PATTERN="^[[:upper:]]{1}[[:lower:]]{2,}$"
 readonly EMAIL_PATTERN="^([a-zA-Z]{3,}([.|_|+|-]?[a-zA-Z0-9]+)?[@][a-zA-Z0-9]+[.][a-zA-Z]{2,3}([.]?[a-zA-Z]{2,3})?)$"
 readonly MOBILE_NUMBER_PATTERN="^[0-9]{1,3}[' '][0-9]{10}$"
-readonly PASSWORD_AT_LEAST_EIGHT_CHARACTERS_LONG="[a-z]{8,}"
 
 #Validate user details
 function validateUserDetails()
@@ -22,6 +21,17 @@ function validateUserDetails()
 function validateUserMobileNumber()
 {
 	[[ $mobileNumber =~ $MOBILE_NUMBER_PATTERN ]] && echo "Valid Mobile Number" || echo "Invalid Mobile Number"
+}
+
+#Validate password of atleast 8 chars long and atleast 1 uppercase letter
+function validatePassword() {
+	local password=$1
+	if [[ ${#password} -ge 8 && "$password" == *[[:lower:]]* && "$password" == *[[:upper:]]* && "$password" == *[0-9]* ]]
+	then
+   	echo "valid"
+	else
+   	echo "invalid"
+	fi
 }
 
 #read first name
@@ -41,5 +51,5 @@ read -p "Enter Mobile Number : " mobileNumber
 validateUserMobileNumber
 
 #read password
-read -p "Enter Password(At least 8 characters long)  : " password
-validateUserDetails $password $PASSWORD_AT_LEAST_EIGHT_CHARACTERS_LONG
+read -p "Enter Password(At least 8 characters long and atleast 1 uppercase letter)  : " password
+validatePassword $password
