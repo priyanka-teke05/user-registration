@@ -23,14 +23,14 @@ function validateUserMobileNumber()
 	[[ $mobileNumber =~ $MOBILE_NUMBER_PATTERN ]] && echo "Valid Mobile Number" || echo "Invalid Mobile Number"
 }
 
-#Validate password of atleast 8 chars long and atleast 1 uppercase letter
+#Validate password of atleast 8 chars long and atleast 1 uppercase letter and numberic
 function validatePassword() {
 	local password=$1
 	if [[ ${#password} -ge 8 && "$password" == *[[:lower:]]* && "$password" == *[[:upper:]]* && "$password" == *[0-9]* ]]
 	then
-   	echo "valid"
+   	echo "valid password"
 	else
-   	echo "invalid"
+   	echo "invalid password"
 	fi
 }
 
